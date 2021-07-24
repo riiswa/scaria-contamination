@@ -22,12 +22,14 @@ namespace ScariaContamination
         [HarmonyPostfix]
         static void ApplyPatch(DamageWorker_AddInjury __instance, DamageInfo dinfo, Pawn pawn)
         {
-            if (__instance is DamageWorker_Bite && pawn != null && dinfo.Instigator != null && dinfo.Instigator is Pawn instigatorPawn)
+            if (__instance is DamageWorker_Bite && pawn != null && dinfo.Instigator != null &&
+                dinfo.Instigator is Pawn instigatorPawn)
             {
                 var scariaOnInstigator = instigatorPawn.health?.hediffSet?.GetFirstHediffOfDef(HediffDefOf.Scaria);
                 var scariaOnTarget = pawn.health?.hediffSet?.GetFirstHediffOfDef(HediffDefOf.Scaria);
                 if (scariaOnInstigator != null && scariaOnTarget == null && Rand.Value <= LoadedModManager
-                    .GetMod<ScariaContamination>().GetSettings<ScariaContaminationSettings>().giveScariaChance)
+                        .GetMod<ScariaContamination>().GetSettings<ScariaContaminationSettings>().giveScariaChance &&
+                    ((Corpse) ThingMaker.MakeThing(pawn.RaceProps.corpseDef))?.GetComp<CompRottable>() != null)
                 {
                     var hediff = HediffMaker.MakeHediff(HediffDefOf.Scaria, pawn);
                     pawn.health?.AddHediff(hediff);
