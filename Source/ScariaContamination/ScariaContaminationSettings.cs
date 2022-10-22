@@ -5,7 +5,7 @@ namespace ScariaContamination
 {
     public class ScariaContaminationSettings: ModSettings
     {
-        public float giveScariaChance = 0.75f;
+        public float giveScariaChance = 0.25f;
 
         public override void ExposeData()
         {
