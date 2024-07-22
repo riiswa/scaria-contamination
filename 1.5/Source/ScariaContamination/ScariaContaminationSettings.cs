@@ -13,21 +13,21 @@ namespace ScariaContamination
             base.ExposeData();
         }
     }
-    
+
     public class ScariaContamination : Mod
     {
-        private ScariaContaminationSettings settings;
-        
+        public static ScariaContaminationSettings settings;
+
         public ScariaContamination(ModContentPack content) : base(content)
         {
-            this.settings = GetSettings<ScariaContaminationSettings>();
+            settings = GetSettings<ScariaContaminationSettings>();
         }
 
         public override void DoSettingsWindowContents(Rect inRect)
         {
-            var listingStandard = new Listing_Standard();
+            Listing_Standard listingStandard = new();
             listingStandard.Begin(inRect);
-            listingStandard.Label("Chance to give Scaria after a bite.");
+            listingStandard.Label("ScariaContamination_Settings_SpreadChance".Translate(settings.giveScariaChance.ToStringPercent()));
             settings.giveScariaChance = listingStandard.Slider(settings.giveScariaChance, 0f, 1f);
             listingStandard.End();
             base.DoSettingsWindowContents(inRect);
@@ -35,7 +35,7 @@ namespace ScariaContamination
 
         public override string SettingsCategory()
         {
-            return "Scaria Contamination";
+            return "ScariaContamination_SettingsCategory".Translate();
         }
     }
 }
