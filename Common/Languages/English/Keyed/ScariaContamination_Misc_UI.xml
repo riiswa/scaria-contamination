@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LanguageData>
     <ScariaContamination_SettingsCategory>Scaria Contamination</ScariaContamination_SettingsCategory>
+    <ScariaContamination_Settings_AvoidMutantsImmuneToInfections>Avoid spreading to mutants which are immune to infections like Ghouls</ScariaContamination_Settings_AvoidMutantsImmuneToInfections>
     <ScariaContamination_Settings_SpreadChance>Chance to give Scaria after a bite: {0}</ScariaContamination_Settings_SpreadChance>
 </LanguageData>

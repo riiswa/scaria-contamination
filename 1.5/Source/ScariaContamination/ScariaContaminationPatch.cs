@@ -21,7 +21,10 @@ public static class DamageWorker_BitePatch
     [HarmonyPostfix]
     public static void ApplyPatch(DamageWorker_AddInjury __instance, DamageInfo dinfo, Pawn pawn)
     {
-        if (__instance is not DamageWorker_Bite || pawn == null || dinfo.Instigator is not Pawn instigatorPawn) return;
+        if (__instance is not DamageWorker_Bite ||
+            pawn == null ||
+            dinfo.Instigator is not Pawn instigatorPawn ||
+            (ScariaContamination.settings.avoidMutantsImmuneToInfections && (pawn.mutant?.Def?.isImmuneToInfections ?? false))) return;
         Hediff scariaOnInstigator = instigatorPawn.health?.hediffSet?.GetFirstHediffOfDef(HediffDefOf.Scaria);
         Hediff scariaOnTarget = pawn.health?.hediffSet?.GetFirstHediffOfDef(HediffDefOf.Scaria);
         if (scariaOnInstigator == null ||

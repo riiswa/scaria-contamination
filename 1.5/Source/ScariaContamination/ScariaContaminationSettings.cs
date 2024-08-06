@@ -6,10 +6,12 @@ namespace ScariaContamination
     public class ScariaContaminationSettings: ModSettings
     {
         public float giveScariaChance = 0.25f;
+        public bool avoidMutantsImmuneToInfections = false;
 
         public override void ExposeData()
         {
             Scribe_Values.Look(ref giveScariaChance, "giveScariaChance", 1f);
+            Scribe_Values.Look(ref avoidMutantsImmuneToInfections, "avoidMutantsImmuneToInfections", false);
             base.ExposeData();
         }
     }
@@ -29,6 +31,10 @@ namespace ScariaContamination
             listingStandard.Begin(inRect);
             listingStandard.Label("ScariaContamination_Settings_SpreadChance".Translate(settings.giveScariaChance.ToStringPercent()));
             settings.giveScariaChance = listingStandard.Slider(settings.giveScariaChance, 0f, 1f);
+            if (ModsConfig.AnomalyActive)
+            {
+                listingStandard.CheckboxLabeled("ScariaContamination_Settings_AvoidMutantsImmuneToInfections".Translate(), ref settings.avoidMutantsImmuneToInfections);
+            }
             listingStandard.End();
             base.DoSettingsWindowContents(inRect);
         }
